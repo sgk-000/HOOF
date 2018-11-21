@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <package format="2">
-  <name>histogram_of</name>
+  <name>HOOF_ROS_pkg</name>
   <version>0.0.0</version>
   <description>The histogram_of package</description>
 
