@@ -47,8 +47,6 @@ class Hoof_node:
                 prev_image = None
                 curr_image = None
                 
-                self.w_num = 5 
-                self.h_num = 5
                 dd = np.zeros((caplen,self.h_num*self.w_num*8))                
                 count = int(cap.get(1))
                 ret, ff = cap.read()
