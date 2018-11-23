@@ -1,0 +1,21 @@
+<launch>
+
+  <include file="$(find video_stream_opencv)/launch/video_file.launch" />
+  
+  <!--define the weight number of cells -->
+  <arg name="w_num" default="10"/>
+  <param name="w_num" value="$(arg w_num)"/>
+  <!--define the height number of cells -->
+  <arg name="h_num" default="10"/>
+  <param name="h_num" value="$(arg h_num)"/>
+  
+  <node pkg= "histogram_of" name="hoof_eight" type="eight_direction_ros.py" output="screen">
+    <remap from='image' to='videofile/videofile_image_view/output' /> 
+  </node>
+
+  <node pkg="image_view" type="image_view" name="image_view" output="screen">
+    <remap from='image' to='hoof_image' />
+  </node>
+
+</launch>
+
