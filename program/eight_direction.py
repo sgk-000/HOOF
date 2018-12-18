@@ -1,5 +1,6 @@
 import sys
 import time
+import skvideo.io
 sys.path.append(".")
 
 import cv2
@@ -18,17 +19,17 @@ fps = int(cap.get(5))
 print ("Video length: ",caplen)
 print("Frame per Second: ", fps)
 #sys.exit()
-w_num = sys.argv[2]
-h_num = sys.argv[3]
+w_num = int(sys.argv[2])
+h_num = int(sys.argv[3])
 prev = None
 curr = None
 count = 1
 dd = np.zeros((caplen,h_num*w_num*8))
 
 count = int(cap.get(1))
-ret, ff = cap.read()
+ret, frame = cap.read()
 print (count, ret)
-frame = cv2.resize(ff,None,fx=0.5,fy=0.5)
+#frame = cv2.resize(frame,None,fx=0.5,fy=0.5)
 height, width = frame.shape[:2]
 celh = int(height/h_num)
 celw = int(width/w_num)
@@ -40,17 +41,15 @@ d8 = np.zeros((h_num,w_num,8))
 d16 = np.zeros((h_num,w_num,16))
 prev = gray
 
-#fourcc = cv2.VideoWriter_fourcc(*'XVID')
-#out = cv2.VideoWriter('./output.avi', fourcc, 30.0, (height,width))
-
+#out = skvideo.io.FFmpegWriter("output.mp4")
 
 while(True):
 	count = int(cap.get(1))
-	ret, ff = cap.read()
-	print (count, ret)
+	ret, frame = cap.read()
+        print (count, ret)
 	if ret is False:
 		break
-	frame = cv2.resize(ff,None,fx=0.5,fy=0.5)
+#	frame = cv2.resize(frame,None,fx=0.5,fy=0.5)
 	height, width = frame.shape[:2]
         celh = int(height/h_num)
 	celw = int(width/w_num)
@@ -82,7 +81,7 @@ while(True):
 	hsv[:,:,1] = 255-edge;
 	bgr = cv2.cvtColor(hsv,cv2.COLOR_HSV2BGR)
 	prev = curr
-
+        
 	dd[count,:] = np.ravel(d8)
         for i in range(1,h_num):
                 cv2.line(bgr,(0,celh*i),(width,celh*i),(0,0,255),2)
@@ -90,9 +89,10 @@ while(True):
                         cv2.line(bgr,(celw*j,0),(celw*j,height),(0,0,255),2)
 	cv2.imshow('bgr',bgr)
 	cv2.imshow('frame',frame)
+#        out.writeFrame(bgr)
 	if cv2.waitKey(1) & 0xFF == ord('q'):
 		break
 #np.savetxt(fn+".csv",dd,delimiter=",")
-out.release()
+#out.close()
 cap.release()
 cv2.destroyAllWindows()
