@@ -10,6 +10,6 @@ I prepared develop emvironment using docker and I packaged my programs as a ROS 
 
 
 Eight_direction.py
-![Eight_direction.py](data/eight_direction_300.jpg)
+![](data/eight_direction_300.jpg)
 Two_direction.py
-![Two_direction.py](data/two_direction_300.jpg)
+![](data/two_direction_300.jpg)
