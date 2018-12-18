@@ -7,3 +7,10 @@ We developed a new feature using optical flow and grid division of space.
 Original paper: 　https://ieeexplore.ieee.org/document/8517229
 
 I prepared develop emvironment using docker and I packaged my programs as a ROS package.
+
+
+Eight_direction.py
+![Eight_direction.py](images/2018/12/eight_direction_300.jpg)
+
+Two_direction.py
+![Two_direction.py](data/two_direction_300.jpg)
